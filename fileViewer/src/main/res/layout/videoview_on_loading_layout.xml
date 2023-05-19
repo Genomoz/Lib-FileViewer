@@ -5,17 +5,18 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/uvv_on_error" />
+    <ProgressBar
+        style="@style/Universal.Widget.ProgressBar"
+        android:background="@android:color/transparent"
+        android:layout_width="36dp"
+        android:layout_height="36dp" />
 
     <TextView
-        android:id="@+id/error_text"
+        android:id="@+id/loading_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="出错了!"
+        android:text="Loading..."
         android:textColor="@android:color/white"
         android:textSize="13dp" />
 </LinearLayout>

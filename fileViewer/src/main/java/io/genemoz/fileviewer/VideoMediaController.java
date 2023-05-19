@@ -158,8 +158,8 @@ public class VideoMediaController extends FrameLayout {
     public VideoMediaController(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.UniversalMediaController);
-        mScalable = a.getBoolean(R.styleable.UniversalMediaController_uvv_scalable, false);
+        TypedArray a = mContext.obtainStyledAttributes(attrs, R.styleable.VideoMediaController);
+        mScalable = a.getBoolean(R.styleable.VideoMediaController_videoview_scalable, false);
         a.recycle();
         init(context);
     }
@@ -172,7 +172,7 @@ public class VideoMediaController extends FrameLayout {
     private void init(Context context) {
         mContext = context;
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View viewRoot = inflater.inflate(R.layout.uvv_player_controller, this);
+        View viewRoot = inflater.inflate(R.layout.videoview_player_controller, this);
         viewRoot.setOnTouchListener(mTouchListener);
         initControllerView(viewRoot);
     }
@@ -344,7 +344,7 @@ public class VideoMediaController extends FrameLayout {
         mCurrentTime.setText("00:00");
         mEndTime.setText("00:00");
         mProgress.setProgress(0);
-        mTurnButton.setImageResource(R.drawable.uvv_player_player_btn);
+        mTurnButton.setImageResource(R.drawable.videoview_player_player_btn);
         setVisibility(View.VISIBLE);
         hideLoading();
     }
@@ -457,17 +457,17 @@ public class VideoMediaController extends FrameLayout {
 
     private void updatePausePlay() {
         if (mPlayer != null && mPlayer.isPlaying()) {
-            mTurnButton.setImageResource(R.drawable.uvv_stop_btn);
+            mTurnButton.setImageResource(R.drawable.videoview_stop_btn);
         } else {
-            mTurnButton.setImageResource(R.drawable.uvv_player_player_btn);
+            mTurnButton.setImageResource(R.drawable.videoview_player_player_btn);
         }
     }
 
     void updateScaleButton() {
         if (mIsFullScreen) {
-            mScaleButton.setImageResource(R.drawable.uvv_star_zoom_in);
+            mScaleButton.setImageResource(R.drawable.videoview_star_zoom_in);
         } else {
-            mScaleButton.setImageResource(R.drawable.uvv_player_scale_btn);
+            mScaleButton.setImageResource(R.drawable.videoview_player_scale_btn);
         }
     }
 

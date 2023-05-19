@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="VideoMediaController">
+        <attr name="videoview_scalable" format="boolean" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CustomVideoView">
+        <attr name="videoview_fitXY" format="boolean" />
+        <attr name="videoview_autoRotation" format="boolean" />
+    </declare-styleable>
+
+</resources>
