@@ -36,11 +36,10 @@ public class CustomVideoView extends SurfaceView
     private static final int STATE_PAUSED = 4;
     private static final int STATE_PLAYBACK_COMPLETED = 5;
     private final String TAG = "UniversalVideoView";
+    private final Context mContext;
     private Uri mUri;
-
     private int mCurrentState = STATE_IDLE;
     private int mTargetState = STATE_IDLE;
-
     // All the stuff we need for playing and showing a video
     private SurfaceHolder mSurfaceHolder = null;
     private MediaPlayer mMediaPlayer = null;
@@ -63,16 +62,59 @@ public class CustomVideoView extends SurfaceView
     private int mSurfaceHeight;
     private VideoMediaController mMediaController;
     private MediaPlayer.OnCompletionListener mOnCompletionListener;
+    private final MediaPlayer.OnCompletionListener mCompletionListener =
+            new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer mp) {
+                    mCurrentState = STATE_PLAYBACK_COMPLETED;
+                    mTargetState = STATE_PLAYBACK_COMPLETED;
+                    if (mMediaController != null) {
+                        boolean a = mMediaPlayer.isPlaying();
+                        int b = mCurrentState;
+                        mMediaController.showComplete();
+                        //FIXME 播放完成后,视频中央会显示一个播放按钮,点击播放按钮会调用start重播,
+                        // 但start后竟然又回调到这里,导致第一次点击按钮不会播放视频,需要点击第二次.
+                        Log.d(TAG, String.format("a=%s,b=%d", a, b));
+                    }
+                    if (mOnCompletionListener != null) {
+                        mOnCompletionListener.onCompletion(mMediaPlayer);
+                    }
+                }
+            };
     private MediaPlayer.OnPreparedListener mOnPreparedListener;
     private int mCurrentBufferPercentage;
+    private final MediaPlayer.OnBufferingUpdateListener mBufferingUpdateListener =
+            new MediaPlayer.OnBufferingUpdateListener() {
+                public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                    mCurrentBufferPercentage = percent;
+                }
+            };
     private MediaPlayer.OnErrorListener mOnErrorListener;
+    private final MediaPlayer.OnErrorListener mErrorListener =
+            new MediaPlayer.OnErrorListener() {
+                public boolean onError(MediaPlayer mp, int framework_err, int impl_err) {
+                    Log.d(TAG, "Error: " + framework_err + "," + impl_err);
+                    mCurrentState = STATE_ERROR;
+                    mTargetState = STATE_ERROR;
+                    if (mMediaController != null) {
+                        mMediaController.showError();
+                    }
+
+                    if (mOnErrorListener != null) {
+                        if (mOnErrorListener.onError(mMediaPlayer, framework_err, impl_err)) {
+                            return true;
+                        }
+                    }
+
+
+                    return true;
+                }
+            };
     private MediaPlayer.OnInfoListener mOnInfoListener;
     private int mSeekWhenPrepared;  // recording the seek position while preparing
     private boolean mCanPause;
     private boolean mCanSeekBack;
     private boolean mCanSeekForward;
     private boolean mPreparedBeforeStart;
-    private final Context mContext;
     private boolean mFitXY = false;
     private boolean mAutoRotation = false;
     private int mVideoViewLayoutWidth = 0;
@@ -132,24 +174,6 @@ public class CustomVideoView extends SurfaceView
             }
         }
     };
-    private final MediaPlayer.OnCompletionListener mCompletionListener =
-            new MediaPlayer.OnCompletionListener() {
-                public void onCompletion(MediaPlayer mp) {
-                    mCurrentState = STATE_PLAYBACK_COMPLETED;
-                    mTargetState = STATE_PLAYBACK_COMPLETED;
-                    if (mMediaController != null) {
-                        boolean a = mMediaPlayer.isPlaying();
-                        int b = mCurrentState;
-                        mMediaController.showComplete();
-                        //FIXME 播放完成后,视频中央会显示一个播放按钮,点击播放按钮会调用start重播,
-                        // 但start后竟然又回调到这里,导致第一次点击按钮不会播放视频,需要点击第二次.
-                        Log.d(TAG, String.format("a=%s,b=%d", a, b));
-                    }
-                    if (mOnCompletionListener != null) {
-                        mOnCompletionListener.onCompletion(mMediaPlayer);
-                    }
-                }
-            };
     private final MediaPlayer.OnInfoListener mInfoListener =
             new MediaPlayer.OnInfoListener() {
                 public boolean onInfo(MediaPlayer mp, int what, int extra) {
@@ -180,32 +204,6 @@ public class CustomVideoView extends SurfaceView
                         return mOnInfoListener.onInfo(mp, what, extra) || handled;
                     }
                     return handled;
-                }
-            };
-    private final MediaPlayer.OnErrorListener mErrorListener =
-            new MediaPlayer.OnErrorListener() {
-                public boolean onError(MediaPlayer mp, int framework_err, int impl_err) {
-                    Log.d(TAG, "Error: " + framework_err + "," + impl_err);
-                    mCurrentState = STATE_ERROR;
-                    mTargetState = STATE_ERROR;
-                    if (mMediaController != null) {
-                        mMediaController.showError();
-                    }
-
-                    if (mOnErrorListener != null) {
-                        if (mOnErrorListener.onError(mMediaPlayer, framework_err, impl_err)) {
-                            return true;
-                        }
-                    }
-
-
-                    return true;
-                }
-            };
-    private final MediaPlayer.OnBufferingUpdateListener mBufferingUpdateListener =
-            new MediaPlayer.OnBufferingUpdateListener() {
-                public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                    mCurrentBufferPercentage = percent;
                 }
             };
     SurfaceHolder.Callback mSHCallback = new SurfaceHolder.Callback() {

@@ -13,7 +13,7 @@ public class OrientationDetector {
 
     private static final String TAG = "OrientationDetector";
     private static final int HOLDING_THRESHOLD = 1500;
-    private Context context;
+    private final Context context;
     private OrientationEventListener orientationEventListener;
 
     private int rotationThreshold = 20;
@@ -143,13 +143,13 @@ public class OrientationDetector {
         rotationThreshold = degree;
     }
 
-    public interface OrientationChangeListener {
-        void onOrientationChanged(int screenOrientation, Direction direction);
+    public enum Direction {
+        PORTRAIT, REVERSE_PORTRAIT, LANDSCAPE, REVERSE_LANDSCAPE
     }
 
 
-    public enum Direction {
-        PORTRAIT, REVERSE_PORTRAIT, LANDSCAPE, REVERSE_LANDSCAPE
+    public interface OrientationChangeListener {
+        void onOrientationChanged(int screenOrientation, Direction direction);
     }
 
 }

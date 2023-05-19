@@ -182,10 +182,10 @@ public class VideoMediaController extends FrameLayout {
     private void initControllerView(View v) {
         mTitleLayout = v.findViewById(R.id.title_part);
         mControlLayout = v.findViewById(R.id.control_layout);
-        loadingLayout = (ViewGroup) v.findViewById(R.id.loading_layout);
-        errorLayout = (ViewGroup) v.findViewById(R.id.error_layout);
-        mTurnButton = (ImageButton) v.findViewById(R.id.turn_button);
-        mScaleButton = (ImageButton) v.findViewById(R.id.scale_button);
+        loadingLayout = v.findViewById(R.id.loading_layout);
+        errorLayout = v.findViewById(R.id.error_layout);
+        mTurnButton = v.findViewById(R.id.turn_button);
+        mScaleButton = v.findViewById(R.id.scale_button);
         mCenterPlayButton = v.findViewById(R.id.center_play_btn);
         mBackButton = v.findViewById(R.id.back_btn);
 
@@ -223,9 +223,9 @@ public class VideoMediaController extends FrameLayout {
             mProgress.setMax(1000);
         }
 
-        mEndTime = (TextView) v.findViewById(R.id.duration);
-        mCurrentTime = (TextView) v.findViewById(R.id.has_played);
-        mTitle = (TextView) v.findViewById(R.id.title);
+        mEndTime = v.findViewById(R.id.duration);
+        mCurrentTime = v.findViewById(R.id.has_played);
+        mTitle = v.findViewById(R.id.title);
         mFormatBuilder = new StringBuilder();
         mFormatter = new Formatter(mFormatBuilder, Locale.getDefault());
     }
