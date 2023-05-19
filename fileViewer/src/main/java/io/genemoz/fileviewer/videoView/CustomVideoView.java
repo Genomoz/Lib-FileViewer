@@ -732,31 +732,6 @@ public class CustomVideoView extends SurfaceView
         }
     }
 
-/*
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    private void switchTitleBar(boolean show) {
-        if (mContext instanceof AppCompatActivity) {
-            AppCompatActivity activity = (AppCompatActivity)mContext;
-            android.support.v7.app.ActionBar supportActionBar = activity.getSupportActionBar();
-            if (supportActionBar != null) {
-                if (show) {
-                    supportActionBar.show();
-                } else {
-                    supportActionBar.hide();
-                }
-            }
-        }else if (mContext instanceof Activity) {
-            Activity activity = (Activity)mContext;
-            if(activity.getActionBar() != null) {
-                if (show) {
-                    activity.getActionBar().show();
-                } else {
-                    activity.getActionBar().hide();
-                }
-            }
-        }
-    }
-*/
 
     public void setVideoViewCallback(VideoViewCallback callback) {
         this.videoViewCallback = callback;
