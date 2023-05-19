@@ -107,7 +107,6 @@ public class OrientationDetector {
             lastCalcTime = current;
         }
         holdingTime += current - lastCalcTime;
-//      Log.d(TAG, "calcHoldingTime holdingTime=" + holdingTime);
         lastCalcTime = current;
     }
 
@@ -145,12 +144,6 @@ public class OrientationDetector {
     }
 
     public interface OrientationChangeListener {
-        /***
-         * @param screenOrientation ActivityInfo.SCREEN_ORIENTATION_PORTRAIT or ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-         *                          or ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE or ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
-         * @param direction         PORTRAIT or REVERSE_PORTRAIT when screenOrientation == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-         *                          LANDSCAPE or REVERSE_LANDSCAPE when screenOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE.
-         */
         void onOrientationChanged(int screenOrientation, Direction direction);
     }
 
