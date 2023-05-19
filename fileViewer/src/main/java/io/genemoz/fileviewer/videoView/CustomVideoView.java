@@ -7,7 +7,6 @@ import android.content.res.TypedArray;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Build;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -271,9 +270,6 @@ public class CustomVideoView extends SurfaceView
     }
 
     private void onMeasureKeepAspectRatio(int widthMeasureSpec, int heightMeasureSpec) {
-        //Log.i("@@@@", "onMeasure(" + MeasureSpec.toString(widthMeasureSpec) + ", "
-        //        + MeasureSpec.toString(heightMeasureSpec) + ")");
-
         int width = getDefaultSize(mVideoWidth, widthMeasureSpec);
         int height = getDefaultSize(mVideoHeight, heightMeasureSpec);
         if (mVideoWidth > 0 && mVideoHeight > 0) {
@@ -342,9 +338,7 @@ public class CustomVideoView extends SurfaceView
     @Override
     public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
         super.onInitializeAccessibilityNodeInfo(info);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            info.setClassName(CustomVideoView.class.getName());
-        }
+        info.setClassName(CustomVideoView.class.getName());
     }
 
     public int resolveAdjustedSize(int desiredSize, int measureSpec) {
