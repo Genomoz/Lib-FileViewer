@@ -36,13 +36,8 @@ public class CustomVideoView extends SurfaceView
     private static final int STATE_PAUSED = 4;
     private static final int STATE_PLAYBACK_COMPLETED = 5;
     private final String TAG = "UniversalVideoView";
-    // settable by the client
     private Uri mUri;
-    // mCurrentState is a VideoView object's current state.
-    // mTargetState is the state that a method caller intends to reach.
-    // For instance, regardless the VideoView object's current state,
-    // calling pause() intends to bring the object to a target state
-    // of STATE_PAUSED.
+
     private int mCurrentState = STATE_IDLE;
     private int mTargetState = STATE_IDLE;
 
@@ -197,44 +192,13 @@ public class CustomVideoView extends SurfaceView
                         mMediaController.showError();
                     }
 
-                    /* If an error handler has been supplied, use it and finish. */
                     if (mOnErrorListener != null) {
                         if (mOnErrorListener.onError(mMediaPlayer, framework_err, impl_err)) {
                             return true;
                         }
                     }
 
-                    /* Otherwise, pop up an error dialog so the user knows that
-                     * something bad has happened. Only try and pop up the dialog
-                     * if we're attached to a window. When we're going away and no
-                     * longer have a window, don't bother showing the user an error.
-                     */
-//                    if (getWindowToken() != null) {
-//                        Resources r = mContext.getResources();
-//                        int messageId;
-//
-//                        if (framework_err == MediaPlayer.MEDIA_ERROR_NOT_VALID_FOR_PROGRESSIVE_PLAYBACK) {
-//                            messageId = com.android.internal.R.string.VideoView_error_text_invalid_progressive_playback;
-//                        } else {
-//                            messageId = com.android.internal.R.string.VideoView_error_text_unknown;
-//                        }
-//
-//                        new AlertDialog.Builder(mContext)
-//                                .setMessage(messageId)
-//                                .setPositiveButton(com.android.internal.R.string.VideoView_error_button,
-//                                        new DialogInterface.OnClickListener() {
-//                                            public void onClick(DialogInterface dialog, int whichButton) {
-//                                        /* If we get here, there is no onError listener, so
-//                                         * at least inform them that the video is over.
-//                                         */
-//                                                if (mOnCompletionListener != null) {
-//                                                    mOnCompletionListener.onCompletion(mMediaPlayer);
-//                                                }
-//                                            }
-//                                        })
-//                                .setCancelable(false)
-//                                .show();
-//                    }
+
                     return true;
                 }
             };
@@ -426,34 +390,17 @@ public class CustomVideoView extends SurfaceView
         mAutoRotation = auto;
     }
 
-    /**
-     * Sets video path.
-     *
-     * @param path the path of the video.
-     */
+
     public void setVideoPath(String path) {
         setVideoURI(Uri.parse(path));
     }
 
-    /**
-     * Sets video URI.
-     *
-     * @param uri the URI of the video.
-     */
+
     public void setVideoURI(Uri uri) {
         setVideoURI(uri, null);
     }
 
-    /**
-     * Sets video URI using specific headers.
-     *
-     * @param uri     the URI of the video.
-     * @param headers the headers for the URI request.
-     *                Note that the cross domain redirection is allowed by default, but that can be
-     *                changed with key/value pairs through the headers parameter with
-     *                "android-allow-cross-domain-redirect" as the key and "0" or "1" as the value
-     *                to disallow or allow cross domain redirection.
-     */
+
     public void setVideoURI(Uri uri, Map<String, String> headers) {
         mUri = uri;
         mSeekWhenPrepared = 0;
@@ -533,34 +480,17 @@ public class CustomVideoView extends SurfaceView
         }
     }
 
-    /**
-     * Register a callback to be invoked when the media file
-     * is loaded and ready to go.
-     *
-     * @param l The callback that will be run
-     */
+
     public void setOnPreparedListener(MediaPlayer.OnPreparedListener l) {
         mOnPreparedListener = l;
     }
 
-    /**
-     * Register a callback to be invoked when the end of a media file
-     * has been reached during playback.
-     *
-     * @param l The callback that will be run
-     */
+
     public void setOnCompletionListener(MediaPlayer.OnCompletionListener l) {
         mOnCompletionListener = l;
     }
 
-    /**
-     * Register a callback to be invoked when an error occurs
-     * during playback or setup.  If no listener is specified,
-     * or if the listener returned false, VideoView will inform
-     * the user of any errors.
-     *
-     * @param l The callback that will be run
-     */
+
     public void setOnErrorListener(MediaPlayer.OnErrorListener l) {
         mOnErrorListener = l;
     }
