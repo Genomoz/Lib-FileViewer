@@ -1,5 +1,6 @@
 package io.genemoz.fileviewerlib;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
+        binding.videoViewCard.setOnClickListener(v -> {
+            startActivity(new Intent(this, ActivityVideoView.class));
+        });
 
 
     }

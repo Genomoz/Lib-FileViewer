@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import io.genemoz.fileviewer.FileViewer;
 import io.genemoz.fileviewerlib.databinding.ActivityVideoViewBinding;
 
 public class ActivityVideoView extends AppCompatActivity {
@@ -16,6 +17,11 @@ public class ActivityVideoView extends AppCompatActivity {
         binding = ActivityVideoViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
+        binding.videoViewDialog.setOnClickListener(v -> {
+            FileViewer.CustomVideoViewerDialog dialog = new FileViewer.CustomVideoViewerDialog(this);
+            dialog.show();
+        });
 
 
     }
