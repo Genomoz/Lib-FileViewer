@@ -26,6 +26,7 @@ import io.genemoz.fileviewer.R;
 
 public class CustomVideoView extends SurfaceView
         implements VideoMediaController.MediaPlayerControl, OrientationDetector.OrientationChangeListener {
+
     // all possible internal states
     private static final int STATE_ERROR = -1;
     private static final int STATE_IDLE = 0;
@@ -486,12 +487,7 @@ public class CustomVideoView extends SurfaceView
         mOnErrorListener = l;
     }
 
-    /**
-     * Register a callback to be invoked when an informational event
-     * occurs during playback or setup.
-     *
-     * @param l The callback that will be run
-     */
+
     public void setOnInfoListener(MediaPlayer.OnInfoListener l) {
         mOnInfoListener = l;
     }
