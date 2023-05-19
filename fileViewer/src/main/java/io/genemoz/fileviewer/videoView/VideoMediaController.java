@@ -1,4 +1,4 @@
-package io.genemoz.fileviewer;
+package io.genemoz.fileviewer.videoView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -22,6 +22,8 @@ import android.widget.TextView;
 import java.lang.ref.WeakReference;
 import java.util.Formatter;
 import java.util.Locale;
+
+import io.genemoz.fileviewer.R;
 
 public class VideoMediaController extends FrameLayout {
 
