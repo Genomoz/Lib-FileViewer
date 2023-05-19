@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MainActivity">
 
     <ScrollView
@@ -20,7 +20,7 @@
             android:paddingBottom="10dp">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/storage_permission"
+                android:id="@+id/video_view_card"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
@@ -52,7 +52,6 @@
                 </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
-
 
 
         </LinearLayout>
