@@ -1,4 +1,4 @@
-package io.genemoz.fileviewerlib;
+package io.genemoz.fileviewerlib.videoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 

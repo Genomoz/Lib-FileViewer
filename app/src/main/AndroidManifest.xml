@@ -13,7 +13,14 @@
         android:theme="@style/Theme.FileViewer"
         tools:targetApi="31" >
         <activity
-            android:name=".ActivityVideoView"
+            android:name=".VideoViewInActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".videoView.ActivityVideoView"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"

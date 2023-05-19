@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import io.genemoz.fileviewerlib.databinding.ActivityMainBinding;
+import io.genemoz.fileviewerlib.videoView.ActivityVideoView;
 
 public class MainActivity extends AppCompatActivity {
 
