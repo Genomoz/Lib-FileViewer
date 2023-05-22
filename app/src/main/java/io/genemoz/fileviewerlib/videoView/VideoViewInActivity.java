@@ -13,7 +13,7 @@ import io.genemoz.fileviewerlib.databinding.ActivityVideoViewInActivityBinding;
 
 public class VideoViewInActivity extends AppCompatActivity {
 
-    private static final String VIDEO_URL = "https://file-examples.com/wp-content/uploads/2017/04/file_example_MP4_480_1_5MG.mp4";
+    private static final String VIDEO_URL = "/storage/emulated/0/Download/MP4 Downloader/Adele-Hello.mp4";
     ActivityVideoViewInActivityBinding binding;
     private int mSeekPosition;
     private int cachedHeight;

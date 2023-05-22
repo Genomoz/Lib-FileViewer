@@ -68,7 +68,7 @@ public class VideoMediaController extends FrameLayout {
             mPlayer.setFullscreen(mIsFullScreen);
         }
     };
-    //仅全屏时才有返回按钮
+
     private final View.OnClickListener mBackListener = new View.OnClickListener() {
         public void onClick(View v) {
             if (mIsFullScreen) {
@@ -285,7 +285,7 @@ public class VideoMediaController extends FrameLayout {
         return mShowing;
     }
 
-    public void hide() {//只负责上下两条bar的隐藏,不负责中央loading,error,playBtn的隐藏
+    public void hide() {
         if (mShowing) {
             mHandler.removeMessages(SHOW_PROGRESS);
             mTitleLayout.setVisibility(GONE);
