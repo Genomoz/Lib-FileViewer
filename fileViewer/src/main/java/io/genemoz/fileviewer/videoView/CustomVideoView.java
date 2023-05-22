@@ -701,20 +701,19 @@ public class CustomVideoView extends SurfaceView
 
     @Override
     public void setFullscreen(boolean fullscreen, int screenOrientation) {
-        // Activity需要设置为: android:configChanges="keyboardHidden|orientation|screenSize"
         Activity activity = (Activity) mContext;
 
         if (fullscreen) {
             if (mVideoViewLayoutWidth == 0 && mVideoViewLayoutHeight == 0) {
                 ViewGroup.LayoutParams params = getLayoutParams();
-                mVideoViewLayoutWidth = params.width;//保存全屏之前的参数
+                mVideoViewLayoutWidth = params.width;
                 mVideoViewLayoutHeight = params.height;
             }
             activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
             activity.setRequestedOrientation(screenOrientation);
         } else {
             ViewGroup.LayoutParams params = getLayoutParams();
-            params.width = mVideoViewLayoutWidth;//使用全屏之前的参数
+            params.width = mVideoViewLayoutWidth;
             params.height = mVideoViewLayoutHeight;
             setLayoutParams(params);
 
