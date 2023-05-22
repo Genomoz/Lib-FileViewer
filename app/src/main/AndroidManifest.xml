@@ -18,7 +18,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FileViewer"
         tools:targetApi="31" >
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/storage_path" />
+        </provider>
+
         <activity
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:name=".videoView.VideoViewInActivity"
             android:exported="false" >
             <meta-data
