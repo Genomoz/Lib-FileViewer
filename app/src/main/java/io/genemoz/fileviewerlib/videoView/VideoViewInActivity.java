@@ -1,6 +1,7 @@
 package io.genemoz.fileviewerlib.videoView;
 
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -22,7 +23,7 @@ public class VideoViewInActivity extends AppCompatActivity {
     private int mSeekPosition;
     private int cachedHeight;
     private boolean isFullscreen;
-
+    private static final Uri VIDEO_URI = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fmedia%2Fcom.whatsapp%2FWhatsApp%2FMedia/document/primary%3AAndroid%2Fmedia%2Fcom.whatsapp%2FWhatsApp%2FMedia%2FWhatsApp%20Video%2FVID-20230404-WA0000.mp4");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,7 +117,7 @@ public class VideoViewInActivity extends AppCompatActivity {
                 videoLayoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
                 videoLayoutParams.height = cachedHeight;
                 binding.videoLayout.setLayoutParams(videoLayoutParams);
-                binding.videoView.setVideoPath(VIDEO_URL);
+                binding.videoView.setVideoURI(VIDEO_URI);
                 binding.videoView.requestFocus();
             }
         });
