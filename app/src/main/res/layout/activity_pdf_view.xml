@@ -20,7 +20,7 @@
             android:paddingBottom="10dp">
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/video_view_activity"
+                android:id="@+id/pdf_view_activity"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
@@ -50,7 +50,7 @@
 
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/video_view_dialog"
+                android:id="@+id/pdf_view_dialog"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_margin="5dp"

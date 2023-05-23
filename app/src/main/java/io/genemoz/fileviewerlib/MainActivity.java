@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import io.genemoz.fileviewerlib.databinding.ActivityMainBinding;
+import io.genemoz.fileviewerlib.pdfView.ActivityPdfView;
 import io.genemoz.fileviewerlib.videoView.ActivityVideoView;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +22,10 @@ public class MainActivity extends AppCompatActivity {
 
         binding.videoViewCard.setOnClickListener(v -> {
             startActivity(new Intent(this, ActivityVideoView.class));
+        });
+
+        binding.pdfViewCard.setOnClickListener(v -> {
+            startActivity(new Intent(this, ActivityPdfView.class));
         });
 
 
