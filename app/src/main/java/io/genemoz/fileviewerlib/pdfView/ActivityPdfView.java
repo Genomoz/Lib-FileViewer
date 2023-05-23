@@ -31,7 +31,7 @@ public class ActivityPdfView extends AppCompatActivity {
 
 
         binding.pdfViewActivity.setOnClickListener(v -> {
-            startActivity(new android.content.Intent(this, VideoViewInActivity.class));
+            startActivity(new android.content.Intent(this, PdfViewInActivity.class));
         });
     }
 }

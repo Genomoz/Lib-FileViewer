@@ -1,13 +1,12 @@
 package io.genemoz.fileviewerlib.pdfView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.File;
 import java.util.Objects;
 
-import io.genemoz.fileviewerlib.R;
-import io.genemoz.fileviewerlib.databinding.ActivityPdfViewBinding;
 import io.genemoz.fileviewerlib.databinding.ActivityPdfViewInActivityBinding;
 
 public class PdfViewInActivity extends AppCompatActivity {
@@ -20,9 +19,13 @@ public class PdfViewInActivity extends AppCompatActivity {
         binding = ActivityPdfViewInActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.pdfView.fromFile(new File("/storage/emulated/0/Test/Hello.pdf"))
+                .enableSwipe(true)
+                .swipeHorizontal(false)
+                .defaultPage(0)
+                .load();
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("PDF View In Activity");
-
+           Objects.requireNonNull(getSupportActionBar()).setTitle("Test PDF");
 
 
     }
