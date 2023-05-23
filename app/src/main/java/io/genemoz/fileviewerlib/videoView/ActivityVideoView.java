@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+
 import io.genemoz.fileviewer.FileViewer;
 import io.genemoz.fileviewerlib.databinding.ActivityVideoViewBinding;
 
@@ -20,6 +22,10 @@ public class ActivityVideoView extends AppCompatActivity {
 
         binding.videoViewDialog.setOnClickListener(v -> {
             FileViewer.CustomVideoViewerDialog dialog = new FileViewer.CustomVideoViewerDialog(this);
+            dialog.setVideoPath("/storage/emulated/0/Download/FB Downloader/A.mp4");
+            dialog.setCancelable(false);
+            dialog.setVideoTitle(new File("/storage/emulated/0/Download/FB Downloader/A.mp4").getName());
+            dialog.setOnCompletionListener(mp -> dialog.dismiss());
             dialog.show();
         });
 
