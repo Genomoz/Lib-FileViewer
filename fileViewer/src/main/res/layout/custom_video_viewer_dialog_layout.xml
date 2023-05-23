@@ -3,12 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/relative_layout_video_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center">
 
-    <FrameLayout
+    <io.genemoz.fileviewer.videoView.AspectRatioFrameLayout
         android:id="@+id/video_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@android:color/black">
 
         <io.genemoz.fileviewer.videoView.CustomVideoView
@@ -16,16 +18,16 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
-            app:videoview_autoRotation="true"
-            app:videoview_fitXY="false" />
+            app:videoview_autoRotation="false"
+            app:videoview_fitXY="true" />
 
         <io.genemoz.fileviewer.videoView.VideoMediaController
             android:id="@+id/media_controller"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            app:videoview_scalable="true" />
+            app:videoview_scalable="false" />
 
-    </FrameLayout>
+    </io.genemoz.fileviewer.videoView.AspectRatioFrameLayout>
 
 
     <ImageView

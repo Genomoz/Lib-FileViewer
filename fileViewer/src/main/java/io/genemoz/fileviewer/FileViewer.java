@@ -4,10 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import io.genemoz.fileviewer.videoView.AspectRatioFrameLayout;
 import io.genemoz.fileviewer.videoView.CustomVideoView;
 import io.genemoz.fileviewer.videoView.VideoMediaController;
 
@@ -20,7 +24,7 @@ public class FileViewer {
         Dialog dialog;
         CustomVideoView customVideoView;
         VideoMediaController videoMediaController;
-        FrameLayout videoLayout;
+        AspectRatioFrameLayout videoLayout;
 
         ImageView closeIcon;
 
@@ -35,10 +39,32 @@ public class FileViewer {
         public void init() {
             dialog.setContentView(R.layout.custom_video_viewer_dialog_layout);
             dialog.setCancelable(false);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+            // full screen
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
 
             customVideoView = dialog.findViewById(R.id.videoView);
             videoMediaController = dialog.findViewById(R.id.media_controller);
             videoLayout = dialog.findViewById(R.id.video_layout);
+
+            videoLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    // Ensure we call this only once
+                    videoLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                    int width = videoLayout.getWidth(); // Get actual width
+                    int height = width * 16 / 9; // Calculate height based on 9:16 ratio
+
+                    // Create new layout params and apply them to the layout
+                    ViewGroup.LayoutParams layoutParams = videoLayout.getLayoutParams();
+                    layoutParams.width = width;
+                    layoutParams.height = height;
+                    videoLayout.setLayoutParams(layoutParams);
+                }
+            });
 
             customVideoView.setMediaController(videoMediaController);
 
