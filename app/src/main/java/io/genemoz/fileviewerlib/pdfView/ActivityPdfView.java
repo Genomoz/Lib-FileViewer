@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
+
 import io.genemoz.fileviewer.FileViewer;
 import io.genemoz.fileviewerlib.R;
 import io.genemoz.fileviewerlib.databinding.ActivityPdfViewBinding;
@@ -22,6 +24,8 @@ public class ActivityPdfView extends AppCompatActivity {
 
         binding.pdfViewDialog.setOnClickListener(v -> {
             FileViewer.CustomPDFViewerDialog dialog = new FileViewer.CustomPDFViewerDialog(this);
+            dialog.setPdfTitle("PDF Title");
+            dialog.setUpPdf(new File("/storage/emulated/0/Test/Hello.pdf"),true, true, 0);
             dialog.show();
         });
 

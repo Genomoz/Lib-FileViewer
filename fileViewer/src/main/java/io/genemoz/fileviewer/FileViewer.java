@@ -8,7 +8,12 @@ import android.util.Log;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import java.io.File;
+import java.io.InputStream;
+
+import io.genemoz.fileviewer.pdfView.PDFView;
 import io.genemoz.fileviewer.videoView.AspectRatioFrameLayout;
 import io.genemoz.fileviewer.videoView.CustomVideoView;
 import io.genemoz.fileviewer.videoView.VideoMediaController;
@@ -141,6 +146,9 @@ public class FileViewer {
         Dialog dialog;
 
         ImageView closeIcon;
+        TextView pdfTitle;
+        PDFView pdfView;
+        private boolean isMethodInvoked = false;
 
 
         public CustomPDFViewerDialog(Activity activity) {
@@ -154,10 +162,11 @@ public class FileViewer {
             dialog.setContentView(R.layout.custom_pdf_dialog_layout);
             dialog.setCancelable(false);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
             // full screen
             dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
+            pdfTitle = dialog.findViewById(R.id.title);
+            pdfView = dialog.findViewById(R.id.pdfView);
 
             closeIcon = dialog.findViewById(R.id.close_icon_video_view);
 
@@ -172,8 +181,56 @@ public class FileViewer {
         }
 
 
+        public void setPdfTitle(String title) {
+            pdfTitle.setText(title);
+        }
+
+        // set uri
+        public void setUpPdf(Uri uri, boolean enableSwipe, boolean swipeHorizontal, int defaultPage) {
+
+            if (isMethodInvoked) {
+                throw new IllegalStateException("One method is already invoked.");
+            }
+            isMethodInvoked = true;
+
+            pdfView.fromUri(uri)
+                    .enableSwipe(enableSwipe)
+                    .swipeHorizontal(!swipeHorizontal)
+                    .defaultPage(defaultPage).load();
+        }
+
+        // set file
+        public void setUpPdf(File file, boolean enableSwipe, boolean swipeHorizontal, int defaultPage) {
+            if (isMethodInvoked) {
+                throw new IllegalStateException("One method is already invoked.");
+            }
+            isMethodInvoked = true;
+
+            pdfView.fromFile(file)
+                    .enableSwipe(enableSwipe)
+                    .swipeHorizontal(!swipeHorizontal)
+                    .defaultPage(defaultPage).load();
+        }
+
+        // set input stream
+        public void setUpPdf(InputStream inputStream, boolean enableSwipe, boolean swipeHorizontal, int defaultPage) {
+
+            if (isMethodInvoked) {
+                throw new IllegalStateException("One method is already invoked.");
+            }
+            isMethodInvoked = true;
+
+            pdfView.fromStream(inputStream)
+                    .enableSwipe(enableSwipe)
+                    .swipeHorizontal(!swipeHorizontal)
+                    .defaultPage(defaultPage).load();
+        }
+
+
         public void show() {
+
             dialog.show();
+
 
         }
 
