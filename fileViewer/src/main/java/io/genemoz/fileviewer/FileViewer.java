@@ -2,10 +2,12 @@ package io.genemoz.fileviewer;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
@@ -122,6 +124,7 @@ public class FileViewer {
         public void setOnCompletionListener(MediaPlayer.OnCompletionListener onCompletionListener) {
             customVideoView.setOnCompletionListener(onCompletionListener);
         }
+
 
 
         public void show() {
