@@ -135,4 +135,53 @@ public class FileViewer {
     }
 
 
+    public static class CustomPDFViewerDialog {
+
+        Activity activity;
+        Dialog dialog;
+
+        ImageView closeIcon;
+
+
+        public CustomPDFViewerDialog(Activity activity) {
+            this.activity = activity;
+            dialog = new Dialog(activity);
+
+            init();
+        }
+
+        public void init() {
+            dialog.setContentView(R.layout.custom_pdf_dialog_layout);
+            dialog.setCancelable(false);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+            // full screen
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+
+            closeIcon = dialog.findViewById(R.id.close_icon_video_view);
+
+            closeIcon.setOnClickListener(v -> {
+                dialog.dismiss();
+            });
+
+        }
+
+        public void setCancelable(boolean cancelable) {
+            dialog.setCancelable(cancelable);
+        }
+
+
+        public void show() {
+            dialog.show();
+
+        }
+
+        public void dismiss() {
+            dialog.dismiss();
+        }
+
+    }
+
+
 }
