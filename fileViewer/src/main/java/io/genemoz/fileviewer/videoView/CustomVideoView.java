@@ -385,7 +385,7 @@ public class CustomVideoView extends SurfaceView
 
     public void setVideoPath(String path) {
         setVideoURI(Uri.parse(path));
-        Log.e(TAG, "setVideoPath: " + Uri.parse(path) );
+        Log.e(TAG, "setVideoPath: " + Uri.parse(path));
     }
 
 
