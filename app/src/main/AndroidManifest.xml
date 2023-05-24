@@ -19,9 +19,23 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:parentActivityName=".pdfView.ActivityPdfView"
+            android:name=".audioView.AudioPlayInActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".audioView.ActivityAudioPlayer"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".pdfView.PdfViewInActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".pdfView.ActivityPdfView" />
         <activity
             android:name=".pdfView.ActivityPdfView"
             android:exported="false" />

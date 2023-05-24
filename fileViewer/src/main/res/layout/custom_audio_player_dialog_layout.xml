@@ -53,7 +53,7 @@
 
 
     <io.genemoz.fileviewer.audioView.CustomAudioPlayer
-        android:id="@+id/video_layout"
+        android:id="@+id/audioPlayer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/topLayout" />

@@ -11,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
+import io.genemoz.fileviewer.audioView.CustomAudioPlayer;
 import io.genemoz.fileviewer.pdfView.PDFView;
 import io.genemoz.fileviewer.videoView.AspectRatioFrameLayout;
 import io.genemoz.fileviewer.videoView.CustomVideoView;
@@ -239,6 +241,89 @@ public class FileViewer {
         }
 
     }
+
+
+    public static class CustomAudioPlayerDialog {
+
+        Activity activity;
+        Dialog dialog;
+
+        ImageView closeIcon;
+        TextView title;
+        CustomAudioPlayer customAudioPlayer;
+        private boolean isMethodInvoked = false;
+
+
+        public CustomAudioPlayerDialog(Activity activity) {
+            this.activity = activity;
+            dialog = new Dialog(activity);
+
+            init();
+        }
+
+        public void init() {
+            dialog.setContentView(R.layout.custom_audio_player_dialog_layout);
+            dialog.setCancelable(false);
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            // full screen
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+
+            title = dialog.findViewById(R.id.title);
+            customAudioPlayer = dialog.findViewById(R.id.audioPlayer);
+
+            closeIcon = dialog.findViewById(R.id.close_icon_video_view);
+
+            closeIcon.setOnClickListener(v -> {
+                dialog.dismiss();
+            });
+
+        }
+
+        public void setCancelable(boolean cancelable) {
+            dialog.setCancelable(cancelable);
+        }
+
+
+        public void setTitle(String titleString) {
+            title.setText(titleString);
+        }
+
+        // set path
+        public void setDataSource(String path) throws IOException {
+
+            if (isMethodInvoked) {
+                throw new IllegalStateException("One method is already invoked.");
+            }
+            isMethodInvoked = true;
+            customAudioPlayer.setDataSource(path);
+        }
+
+
+        // set uri
+        public void setDataSource(Uri uri) throws IOException {
+
+            if (isMethodInvoked) {
+                throw new IllegalStateException("One method is already invoked.");
+            }
+            isMethodInvoked = true;
+            customAudioPlayer.setDataSource(uri);
+        }
+
+
+
+        public void show() {
+
+            dialog.show();
+
+
+        }
+
+        public void dismiss() {
+            dialog.dismiss();
+        }
+
+    }
+
 
 
 }
