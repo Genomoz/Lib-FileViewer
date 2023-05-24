@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".audioView.AudioPlayInActivity">
+    android:background="#F5F5F5"
+    tools:context=".audioView.ActivityAudioPlayer">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#393939"
+        android:textSize="17sp"
+        android:text="Audio Player" />
+
+    <io.genemoz.fileviewer.audioView.CustomAudioPlayer
+        android:layout_below="@id/title"
+        android:id="@+id/audioPlayer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp" />
+
+</RelativeLayout>
