@@ -18,7 +18,7 @@ import io.genemoz.fileviewerlib.databinding.ActivityVideoViewInActivityBinding;
 
 public class VideoViewInActivity extends AppCompatActivity {
 
-    private static final String VIDEO_URL = "/storage/emulated/0/Download/FB Downloader/A.mp4";
+    private static final String VIDEO_URL = "/storage/emulated/0/Test/FB.mp4";
     ActivityVideoViewInActivityBinding binding;
     private int mSeekPosition;
     private int cachedHeight;

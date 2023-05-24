@@ -26,6 +26,7 @@ public class ActivityAudioPlayer extends AppCompatActivity {
 
         binding.audioPlayDialog.setOnClickListener(v -> {
             FileViewer.CustomAudioPlayerDialog dialog = new FileViewer.CustomAudioPlayerDialog(this);
+            dialog.setTitle("Audio Title");
             try {
                 dialog.setDataSource("/storage/emulated/0/Test/AUD.mp3");
             } catch (IOException e) {

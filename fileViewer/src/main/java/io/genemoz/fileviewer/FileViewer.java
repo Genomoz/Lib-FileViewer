@@ -312,9 +312,8 @@ public class FileViewer {
 
 
         public void show() {
-
             dialog.show();
-
+            customAudioPlayer.play();
 
         }
 
