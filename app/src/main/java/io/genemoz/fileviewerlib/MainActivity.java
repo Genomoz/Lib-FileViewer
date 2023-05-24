@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, ActivityPdfView.class));
         });
 
+
         binding.audioViewCard.setOnClickListener(v -> {
             startActivity(new Intent(this, ActivityAudioPlayer.class));
         });
