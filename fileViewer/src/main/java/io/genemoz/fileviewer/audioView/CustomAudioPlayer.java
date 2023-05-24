@@ -2,10 +2,10 @@ package io.genemoz.fileviewer.audioView;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -23,7 +23,7 @@ public class CustomAudioPlayer extends RelativeLayout {
     private TextView elapsedTimeLabel;
     private TextView remainingTimeLabel;
     private MediaPlayer mediaPlayer;
-    private Handler handler = new Handler();
+    private final Handler handler = new Handler();
 
     public CustomAudioPlayer(Context context) {
         super(context);
@@ -78,6 +78,14 @@ public class CustomAudioPlayer extends RelativeLayout {
         mediaPlayer.prepare();
         positionBar.setMax(mediaPlayer.getDuration());
     }
+
+    public void setDataSource(Uri uri) throws IOException {
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.setDataSource(getContext(), uri);
+        mediaPlayer.prepare();
+        positionBar.setMax(mediaPlayer.getDuration());
+    }
+
 
     public void play() {
         if (mediaPlayer != null) {
