@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import io.genemoz.fileviewerlib.audioView.ActivityAudioPlayer;
 import io.genemoz.fileviewerlib.databinding.ActivityMainBinding;
 import io.genemoz.fileviewerlib.pdfView.ActivityPdfView;
 import io.genemoz.fileviewerlib.videoView.ActivityVideoView;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         binding.audioViewCard.setOnClickListener(v -> {
-            startActivity(new Intent(this, ActivityAudioView.class));
+            startActivity(new Intent(this, ActivityAudioPlayer.class));
         });
 
 

@@ -41,7 +41,7 @@ public class FileViewer {
             init();
         }
 
-        public void init() {
+        private void init() {
             dialog.setContentView(R.layout.custom_video_viewer_dialog_layout);
             dialog.setCancelable(false);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -160,7 +160,7 @@ public class FileViewer {
             init();
         }
 
-        public void init() {
+        private void init() {
             dialog.setContentView(R.layout.custom_pdf_dialog_layout);
             dialog.setCancelable(false);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -261,7 +261,7 @@ public class FileViewer {
             init();
         }
 
-        public void init() {
+        private void init() {
             dialog.setContentView(R.layout.custom_audio_player_dialog_layout);
             dialog.setCancelable(false);
             dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
