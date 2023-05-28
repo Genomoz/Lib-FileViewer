@@ -63,20 +63,27 @@ public class CustomAudioPlayer extends RelativeLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (mediaPlayer != null && fromUser) {
-                    int duration = mediaPlayer.getDuration();
-                    int seek = (int) ((float) progress / 100.0 * (float) duration);
-                    mediaPlayer.seekTo(seek);
+                    mediaPlayer.seekTo(progress);
+                    elapsedTimeLabel.setText(formatTime(progress));
+                    remainingTimeLabel.setText(formatTime(mediaPlayer.getDuration() - progress));
                 }
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
+                if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+                    mediaPlayer.pause();
+                }
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+                if (mediaPlayer != null) {
+                    mediaPlayer.start();
+                }
             }
         });
+
     }
 
     public void setDataSource(String path) throws IOException {
