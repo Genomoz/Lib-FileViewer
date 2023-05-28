@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
+
 }
 
 android {
@@ -24,6 +26,14 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
 }
 
 dependencies {
@@ -36,4 +46,17 @@ dependencies {
 
     api 'com.github.barteksc:pdfium-android:1.9.0'
 
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId 'io.genemoz'
+                artifactId 'fileviewer'
+                version '0.1'
+                from components.release
+            }
+        }
+    }
 }

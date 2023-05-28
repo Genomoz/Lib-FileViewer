@@ -17,13 +17,18 @@ import java.util.concurrent.TimeUnit;
 import io.genemoz.fileviewer.R;
 
 public class CustomAudioPlayer extends RelativeLayout {
-
     private ImageView playButton;
     private SeekBar positionBar;
     private TextView elapsedTimeLabel;
     private TextView remainingTimeLabel;
     private MediaPlayer mediaPlayer;
     private final Handler handler = new Handler();
+    private Runnable updateSeekBarRunnable = new Runnable() {
+        @Override
+        public void run() {
+            updateSeekBar();
+        }
+    };
 
     public CustomAudioPlayer(Context context) {
         super(context);
@@ -58,7 +63,9 @@ public class CustomAudioPlayer extends RelativeLayout {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (mediaPlayer != null && fromUser) {
-                    mediaPlayer.seekTo(progress);
+                    int duration = mediaPlayer.getDuration();
+                    int seek = (int) ((float) progress / 100.0 * (float) duration);
+                    mediaPlayer.seekTo(seek);
                 }
             }
 
@@ -91,7 +98,17 @@ public class CustomAudioPlayer extends RelativeLayout {
         if (mediaPlayer != null) {
             mediaPlayer.start();
             playButton.setImageResource(R.drawable.ic_pause_audio_lib);
-            updateSeekBar();
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    handler.removeCallbacks(updateSeekBarRunnable);  // stop updating
+                    playButton.setImageResource(R.drawable.ic_play_audio_lib);
+                    positionBar.setProgress(0);
+                    elapsedTimeLabel.setText(formatTime(0));
+                    remainingTimeLabel.setText(formatTime(mediaPlayer.getDuration()));
+                }
+            });
+            handler.post(updateSeekBarRunnable);  // start updating
         }
     }
 
@@ -99,13 +116,14 @@ public class CustomAudioPlayer extends RelativeLayout {
         if (mediaPlayer != null) {
             mediaPlayer.pause();
             playButton.setImageResource(R.drawable.ic_play_audio_lib);
+            handler.removeCallbacks(updateSeekBarRunnable);  // stop updating
         }
     }
 
     private void updateSeekBar() {
         if (mediaPlayer != null) {
             positionBar.setProgress(mediaPlayer.getCurrentPosition());
-            handler.postDelayed(this::updateSeekBar, 1000);
+            handler.postDelayed(updateSeekBarRunnable, 1000);
             elapsedTimeLabel.setText(formatTime(mediaPlayer.getCurrentPosition()));
             remainingTimeLabel.setText(formatTime(mediaPlayer.getDuration() - mediaPlayer.getCurrentPosition()));
         }
@@ -124,6 +142,7 @@ public class CustomAudioPlayer extends RelativeLayout {
             if (mediaPlayer.isPlaying()) {
                 mediaPlayer.stop();
             }
+            handler.removeCallbacks(updateSeekBarRunnable);  // stop updating
             mediaPlayer.release();
             mediaPlayer = null;
         }
