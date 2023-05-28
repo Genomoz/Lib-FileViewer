@@ -1,16 +1,13 @@
 package io.genemoz.fileviewerlib.audioView;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-import java.io.File;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.io.IOException;
 
 import io.genemoz.fileviewer.FileViewer;
-import io.genemoz.fileviewerlib.R;
 import io.genemoz.fileviewerlib.databinding.ActivityAudioPlayerBinding;
-import io.genemoz.fileviewerlib.videoView.VideoViewInActivity;
 
 public class ActivityAudioPlayer extends AppCompatActivity {
 
@@ -40,7 +37,6 @@ public class ActivityAudioPlayer extends AppCompatActivity {
         binding.audioPlayActivity.setOnClickListener(v -> {
             startActivity(new android.content.Intent(this, AudioPlayInActivity.class));
         });
-
 
 
     }
