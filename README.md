@@ -11,6 +11,6 @@
   
   ```
   	dependencies {
-	        implementation 'com.github.Genomoz:Lib-FileViewer:0.1'
+	        implementation 'com.github.Genomoz:Lib-FileViewer:0.2'
 	}
   ```
